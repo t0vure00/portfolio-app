@@ -1,5 +1,24 @@
-.App {
+body {
+  width: 100%;
+  margin: 10px;
+  margin-top: 0px;
+
   background-color: #d2d2d2;
 
   font-family: "Roboto", sans-serif;
+}
+
+.page_background {
+  width: 95%;
+  height: 600px;
+  max-width: 1300px;
+  min-width: 900px;
+  border-radius: 20px;
+  border-top-right-radius: 0px;
+  margin-left: auto;
+  margin-right: auto;
+
+  background-color: #FFFFFF;
+
+  position: relative;
 }
