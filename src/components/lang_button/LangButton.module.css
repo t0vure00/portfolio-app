@@ -1,0 +1,49 @@
+.lang_button__dropdown {
+  position: relative;
+  display: inline-block;
+
+  box-sizing: border-box;
+  height: 40px;
+  width: 40px;
+  border: 1px solid #000;
+  border-radius: 10px;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  background-color: #F2F2F2;
+
+  align-content: center;
+  text-align: center;
+}
+
+.lang_button__dropbtn {
+  position: absolute;
+  left: -1px;
+
+  display: none;
+  box-sizing: border-box;
+  height: 40px;
+  width: 40px;
+  border: 1px solid #000;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  background-color: #F2F2F2;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.lang_button__dropdown:hover {
+  border-bottom: none;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.lang_button__dropdown:hover .lang_button__dropbtn {
+  display: block;
+}
