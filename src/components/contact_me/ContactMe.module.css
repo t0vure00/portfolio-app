@@ -1,0 +1,33 @@
+.contact_me {
+    display: flex;
+    justify-content: flex-end;
+    width: 270px;
+}
+
+.contact_me__text {
+    align-self: center;
+
+    padding-right: 15px;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none; 
+}
+
+.contact_me__button {
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+    margin-right: 30px;
+
+    background-color: #0A66C2;
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 600;
+    align-content: center;
+    text-align: center;
+}

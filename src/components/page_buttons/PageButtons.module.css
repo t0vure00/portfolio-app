@@ -1,0 +1,27 @@
+.page_buttons {
+    display: flex;
+
+    text-transform: uppercase;
+}
+
+.page_buttons__button {
+    height: 50px;
+    width: 140px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+    background-color: #717170;
+    color: #fff;
+
+    font-size: 18px;
+    font-weight: 600;
+    align-content: center;
+    text-align: center;
+
+    cursor: pointer;
+} 
+
+.page_buttons__button__active {
+    background-color: #fff;
+    color: #000;
+}
