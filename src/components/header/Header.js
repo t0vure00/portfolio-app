@@ -6,7 +6,7 @@ import LangButton from "../lang_button/LangButton";
 
 export default function Header(props) {
   const { general_data, frontpage_data, handleLangButtonClick, handlePageButtonClick, 
-          activePage, lang} = props;
+          activePage, lang, titles} = props;
           
   return(
     <div className={ styles.header }>
@@ -14,12 +14,12 @@ export default function Header(props) {
               frontpage_data.frontpage_title.toUpperCase() }</div>
       <div className={ styles.header__buttons }>
         <div className={ styles.header__buttons__upper }>
-          <ContactMe text={ general_data.label.contact_me_en }></ContactMe>
+          <ContactMe text={ general_data.label.contact_me }></ContactMe>
           <LangButton lang={ lang } handleClick={ handleLangButtonClick }>
           </LangButton>
         </div>
-        <PageButtons handleClick={ handlePageButtonClick } activePage={ activePage }
-                lang={ lang }>
+        <PageButtons handleClick={ handlePageButtonClick } 
+                activePageIndex={ activePage } titles={ titles }>
         </PageButtons>
       </div>
     </div>
