@@ -2,44 +2,27 @@ import React from "react";
 import { useState } from 'react';
 import './App.css';
 import Header from './components/header/Header';
+import { getGenEnButtonTexts, getGenEnLabelTexts, getGenFiButtonTexts, 
+        getGenFiLabelTexts, getFrontpageLabelTexts  } from './components/firebase/Firebase';
 
-// TO DO: this is stand in data, will be replaced later with data from firebase
 const general_data_fi = {
-  label: {
-    contact_me: "Ota yhteyttä",
-  },
-  button: {
-    background: "Tausta",
-    linkedin: "LinkedIn",
-    frontpage: "Etusivu",
-    lang_choice_en: "ENFI",
-    lang_choice_fi: "FIEN",
-    projects: "Projektit"
-  }
+  label: getGenFiLabelTexts(),
+  button: getGenFiButtonTexts()
 };
 
 const general_data_en = {
-  label: {
-    contact_me: "Contact me",
-  },
-  button: {
-    background: "Background",
-    linkedin: "LinkedIn",
-    frontpage: "Frontpage",
-    lang_choice_en: "ENFI",
-    lang_choice_fi: "FIEN",
-    projects: "Projects",
-  },
+  label: getGenEnLabelTexts(),
+  button: getGenEnButtonTexts(),
 }
 
 const frontpage_data = {
-    frontpage_title: "Portfolio"
+  label: getFrontpageLabelTexts()
 };
 
 
 function App() {
-  const [lang, setLang] = useState(general_data_fi.button.lang_choice_fi)
   const [data, setData] = useState([general_data_fi, frontpage_data]);
+  const [lang, setLang] = useState(general_data_fi.button.lang_choice_fi)
   const [activePage, setActivePage] = useState(0);
 
   function handlePageButtonClick(type){

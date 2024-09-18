@@ -11,7 +11,7 @@ export default function Header(props) {
   return(
     <div className={ styles.header }>
       <div className={ styles.header__title }>{ 
-              frontpage_data.frontpage_title.toUpperCase() }</div>
+              frontpage_data.label.title.toUpperCase() }</div>
       <div className={ styles.header__buttons }>
         <div className={ styles.header__buttons__upper }>
           <ContactMe text={ general_data.label.contact_me }></ContactMe>
