@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/portfolio-app/static/css/main.e5121176.css",
-    "main.js": "/portfolio-app/static/js/main.e48a1147.js",
-    "static/js/453.f4fbaa6d.chunk.js": "/portfolio-app/static/js/453.f4fbaa6d.chunk.js",
-    "index.html": "/portfolio-app/index.html",
-    "main.e5121176.css.map": "/portfolio-app/static/css/main.e5121176.css.map",
-    "main.e48a1147.js.map": "/portfolio-app/static/js/main.e48a1147.js.map",
-    "453.f4fbaa6d.chunk.js.map": "/portfolio-app/static/js/453.f4fbaa6d.chunk.js.map"
+    "main.css": "/potfolio-app/static/css/main.acb10946.css",
+    "main.js": "/potfolio-app/static/js/main.fda7e216.js",
+    "static/js/453.f4fbaa6d.chunk.js": "/potfolio-app/static/js/453.f4fbaa6d.chunk.js",
+    "index.html": "/potfolio-app/index.html",
+    "main.acb10946.css.map": "/potfolio-app/static/css/main.acb10946.css.map",
+    "main.fda7e216.js.map": "/potfolio-app/static/js/main.fda7e216.js.map",
+    "453.f4fbaa6d.chunk.js.map": "/potfolio-app/static/js/453.f4fbaa6d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e5121176.css",
-    "static/js/main.e48a1147.js"
+    "static/css/main.acb10946.css",
+    "static/js/main.fda7e216.js"
   ]
 }
