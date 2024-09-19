@@ -24,8 +24,12 @@ const general_data = {
 };
 
 const frontpage_data = {
-  frontpage_title: "Portfolio"
+  label: {
+    title: "Portfolio"
+  }
 };
+
+const titles_fi = ['etusivu', 'projektit', 'tausta'];
 
 let container = null;
 
@@ -44,7 +48,8 @@ describe("<Header />", () => {
     act(() => {
       createRoot(container).render(<Header general_data={general_data} 
               frontpage_data={frontpage_data} handlePageButtonClick={null} 
-              handleLangButtonClick={null} activePage={0} lang={'FIEN'}>
+              handleLangButtonClick={null} activePage={0} lang={'FIEN'}
+              titles= { titles_fi }>
               </Header>);
     });
     const title_element = screen.getByText(/Portfolio/i);
