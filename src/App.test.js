@@ -3,6 +3,11 @@ import { createRoot } from 'react-dom/client';
 import {act} from 'react';
 import App from './App';
 
+import {  getGenEnTexts, getGenFiTexts, getFrontpageLabelTexts, 
+        getProEnTexts, getProFiTexts } from './components/firebase/Firebase';
+
+jest.mock('./components/firebase/Firebase');
+
 let container = null;
 
 beforeEach(() => {
@@ -21,6 +26,7 @@ describe("<App />", () => {
     act(() => {
       createRoot(container).render(<App />);
     });
+    getGenEnTexts.get.mockResolvedValue("dog");
     const header_element = container.getElementsByClassName('header')[0];
     expect(header_element).toBeInTheDocument();
   });
