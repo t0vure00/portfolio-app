@@ -21,16 +21,31 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 const genEnBTextRef = doc(db, 'general_en', 'button');
 const genEnBTextSnapshot = await getDoc(genEnBTextRef);
 const genEnLTextRef = doc(db, 'general_en', 'label');
 const genEnLTextSnapshot = await getDoc(genEnLTextRef);
+
 const genFiBTextRef = doc(db, 'general_fi', 'button');
 const genFiBTextSnapshot = await getDoc(genFiBTextRef);
 const genFiLTextRef = doc(db, 'general_fi', 'label');
 const genFiLTextSnapshot = await getDoc(genFiLTextRef);
+
+
 const frontpageLTextRef = doc(db, 'frontpage', 'label');
 const frontpageLTextSnapshot = await getDoc(frontpageLTextRef);
+
+
+const proEnBTextRef = doc(db, 'projects_en', 'button');
+const proEnBTextSnapshot = await getDoc(proEnBTextRef);
+const proEnLTextRef = doc(db, 'projects_en', 'label');
+const proEnLTextSnapshot = await getDoc(proEnLTextRef);
+
+const proFiBTextRef = doc(db, 'projects_fi', 'button');
+const proFiBTextSnapshot = await getDoc(proFiBTextRef);
+const proFiLTextRef = doc(db, 'projects_fi', 'label');
+const proFiLTextSnapshot = await getDoc(proFiLTextRef);
 
 function getGenEnButtonTexts() {
   if(genEnBTextSnapshot.exists){
@@ -44,6 +59,14 @@ function getGenEnLabelTexts() {
   }
 }
 
+function getGenEnTexts(){
+  return {
+    label: getGenEnLabelTexts(),
+    button: getGenEnButtonTexts()
+  }
+}
+
+
 function getGenFiButtonTexts() {
   if(genFiBTextSnapshot.exists){
     return genFiBTextSnapshot.data();
@@ -56,11 +79,61 @@ function getGenFiLabelTexts() {
   }
 }
 
-function getFrontpageLabelTexts() {
-  if(frontpageLTextSnapshot.exists){
-    return frontpageLTextSnapshot.data();
+function getGenFiTexts(){
+  return {
+    label: getGenFiLabelTexts(),
+    button: getGenFiButtonTexts()
   }
 }
 
-export { getGenEnButtonTexts, getGenEnLabelTexts, getGenFiButtonTexts, 
-        getGenFiLabelTexts, getFrontpageLabelTexts };
+
+function getFrontpageLabelTexts() {
+  if(frontpageLTextSnapshot.exists){
+    return {
+      label: frontpageLTextSnapshot.data() 
+    };
+  }
+}
+
+
+function getProEnButtonTexts() {
+  if(proEnBTextSnapshot.exists){
+    return proEnBTextSnapshot.data();
+  }
+}
+
+function getProEnLabelTexts() {
+  if(proEnLTextSnapshot.exists){
+    return proEnLTextSnapshot.data();
+  }
+}
+
+
+function getProEnTexts(){
+  return {
+    label: getProEnLabelTexts(),
+    button: getProEnButtonTexts()
+  }
+}
+
+function getProFiButtonTexts() {
+  if(proFiBTextSnapshot.exists){
+    return proFiBTextSnapshot.data();
+  }
+}
+
+function getProFiLabelTexts() {
+  if(proFiLTextSnapshot.exists){
+    return proFiLTextSnapshot.data();
+  }
+}
+
+function getProFiTexts(){
+  return {
+    label: getProFiLabelTexts(),
+    button: getProFiButtonTexts()
+  }
+}
+
+export { getGenEnTexts, getGenFiTexts, getFrontpageLabelTexts, 
+        getProEnTexts, getProFiTexts };
