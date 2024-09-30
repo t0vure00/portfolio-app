@@ -7,8 +7,6 @@ import LangButton from "../lang_button/LangButton";
 export default function Header({ data }) {
   const { general_data, page_spec_data, handleLangButtonClick, handlePageButtonClick, 
           activePage, lang, titles} = data;
-
-  // console.log(page_spec_data);
           
   return(
     <div className={ styles.header }>

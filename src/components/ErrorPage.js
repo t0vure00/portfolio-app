@@ -5,7 +5,7 @@ export default function ErrorPage404() {
   let location = useLocation();
   console.log(location);
   return (
-    <div>
+    <div className="error_page">
       <h1>
         Resource not found at {location.pathname}
         <br />
