@@ -1,11 +1,11 @@
 import React from "react";
 import styles from './PageButtons.module.css';
-import { Link, useLocation } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 
 export default function PageButtons(props){
   let { handleClick, activePageIndex, titles} = props;
-  let paths = ['/', '/projects', '/background'];
+  let paths = ['/', '/background', '/projects'];
 
   return (
     <nav className={ styles.page_buttons }>
