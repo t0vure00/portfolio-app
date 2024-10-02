@@ -40,8 +40,8 @@ function App() {
 
   function getCurrentActivePage() {
     const current_page = window.location.href;
-    return current_page.endsWith('projects') ? 1 : 
-            current_page.endsWith('background') ? 2 : 0;
+    return current_page.endsWith('background') ? 1 : 
+            current_page.endsWith('projects') ? 2 : 0;
   }
 
   function updateData(lang){
@@ -87,7 +87,7 @@ function App() {
     handleLangButtonClick: handleLangButtonClick,
     activePage: activePage,
     lang: lang,
-    titles: [genData.button.frontpage, genData.button.projects, genData.button.background]
+    titles: [genData.button.frontpage, genData.button.background, genData.button.projects]
   };
 
   let dataForProjectsPage = { ...dataForFrontPage };
@@ -100,8 +100,8 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Frontpage data={ dataForFrontPage } />} />
-        <Route path="/projects" element={<Projects data={ dataForProjectsPage } />} />
         <Route path="/background" element={<Background data={ dataForBackgroundPage }/>} />
+        <Route path="/projects" element={<Projects data={ dataForProjectsPage } />} />
         <Route path="*" element={<ErrorPage404 />} />
       </Routes>
     </div>
