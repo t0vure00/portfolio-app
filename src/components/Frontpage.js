@@ -3,7 +3,7 @@ import Header from './/header/Header';
 
 export default function Fronptage({ data }){
   return (
-    <div className="Frontpage">
+    <div className="frontpage">
       <Header data={ data }></Header>
       <div className="page_background"></div>
     </div>
