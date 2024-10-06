@@ -1,10 +1,5 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "@firebase/app";
 import { getFirestore, getDoc, getDocs, doc, collection} from "@firebase/firestore";
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-// import { getFirestore, getDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-// import { geStorage } from "/node_modules//firebase/storage";
-// TODO: Add connection to storage when making projects page
 
 // Firebase configuration
 const firebaseConfig = {
@@ -45,6 +40,11 @@ const proFiBTextRef = doc(db, 'projects_fi', 'button');
 const proFiBTextSnapshot = await getDoc(proFiBTextRef);
 const proFiLTextRef = doc(db, 'projects_fi', 'label');
 const proFiLTextSnapshot = await getDoc(proFiLTextRef);
+
+const proFiProTextRef = collection(db, '/projects_fi/label/projects');
+const proFiProTextSnapshot = await getDocs(proFiProTextRef);
+const proEnProTextRef = collection(db, '/projects_en/label/projects');
+const proEnProTextSnapshot = await getDocs(proEnProTextRef);
 
 
 const backFiLTextRef = doc(db, 'background_fi', 'label');
@@ -124,11 +124,21 @@ function getProEnLabelTexts() {
   }
 }
 
+function getProEnProjectTexts() {
+  const docs = [];
+  for(let i = 0; i<proEnProTextSnapshot.docs.length; i++){
+    docs[i] = proEnProTextSnapshot.docs[i].data();
+  }
+  // So the newest one is first
+  docs.reverse();
+  return docs;
+}
 
 function getProjectsEnTexts(){
   return {
     label: getProEnLabelTexts(),
-    button: getProEnButtonTexts()
+    button: getProEnButtonTexts(),
+    projects: getProEnProjectTexts()
   }
 }
 
@@ -145,10 +155,21 @@ function getProFiLabelTexts() {
   }
 }
 
+function getProFiProjectTexts() {
+  const docs = [];
+  for(let i = 0; i<proFiProTextSnapshot.docs.length; i++){
+    docs[i] = proFiProTextSnapshot.docs[i].data();
+  }
+  // So the newest one is first
+  docs.reverse();
+  return docs;
+}
+
 function getProjectsFiTexts(){
   return {
     label: getProFiLabelTexts(),
-    button: getProFiButtonTexts()
+    button: getProFiButtonTexts(),
+    projects: getProFiProjectTexts()
   }
 }
 
