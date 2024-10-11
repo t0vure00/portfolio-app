@@ -3,7 +3,7 @@ import Header from './header/Header';
 import styles from './Background.module.css';
 import InfoBlock from "./info_block/InfoBlock";
 
-export default function Background({ data }){
+export default function Background(props){
   function addEmptyIndexes(to_add_to){
     if(to_add_to.length<3){
       for(let i = to_add_to.length; i<3; i++){
@@ -13,13 +13,13 @@ export default function Background({ data }){
     return to_add_to;
   }
 
-  const { label, education, experience } = data.page_spec_data;
+  const { label, education, experience } = props.page_spec_data;
   const education_list = addEmptyIndexes(education);
   const experience_list = addEmptyIndexes(experience);
 
   return (
     <div className="background">
-      <Header data={ data }></Header>
+      <Header {...props}></Header>
       <div className="page_background">
         <div className={ styles.background_info }>
           { label.edu_title }

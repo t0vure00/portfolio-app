@@ -160,7 +160,6 @@ function getProFiProjectTexts() {
   for(let i = 0; i<proFiProTextSnapshot.docs.length; i++){
     docs[i] = proFiProTextSnapshot.docs[i].data();
   }
-  // So the newest one is first
   docs.reverse();
   return docs;
 }
@@ -185,7 +184,6 @@ function getBackFiEducationTexts() {
   for(let i = 0; i<backFiEdTextSnapshot.docs.length; i++){
     docs[i] = backFiEdTextSnapshot.docs[i].data();
   }
-  // So the newest one is first
   docs.reverse();
   return docs;
 }
