@@ -2,18 +2,18 @@ import React from "react";
 import Header from './/header/Header';
 import ProjectBlock from "./project_block/ProjectBlock";
 
-export default function Projects({ data }){
-  const texts = data.page_spec_data;
-  let projects = [texts.projects[0], texts.projects[1], texts.projects[2]];
+export default function Projects(props){
+  const texts = props.page_spec_data;
+  let projects = props.projects;
 
   return (
     <div className="projects">
-      <Header data={ data }></Header>
+      <Header {...props}></Header>
       <div className="page_background">
         {
           projects.map((project, index) => {
             return (
-              <ProjectBlock project={ project } index={ index } 
+              <ProjectBlock key={ ('project_' + index) }project={ project } index={ index } 
                       label={ texts.label }></ProjectBlock>
             );
           })

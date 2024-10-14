@@ -21,11 +21,11 @@
 
 .project_block__project_img {
   height: 30%;
-  width: 95%;
 
   text-align: center;
 
   overflow: hidden;
+  box-shadow: -5px 5px 5px 0px #9b9b9b;
 }
 
 .project_block__project_img__no_zoom {
@@ -41,6 +41,7 @@ img {
 
 .project_block__project_img:hover {
   transform: scale(2.2);
+  box-shadow: none;
 }
 
 .project_block__tech_stack {
@@ -61,12 +62,10 @@ img {
 
 .project_block__scroll {
   height: 42%;
-  width: 90%;
-  padding: 10px;
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-
-  background-color: #d2d2d2;
+  width: 85%;
+  padding: 8px;
+  border: 3px solid #f1f1f1;
+  border-radius: 5px;
 
   text-align: center;
 
@@ -97,8 +96,6 @@ img {
   }
 
   .project_block__title {
-    padding: 5px;
-
     font-size: 16px;
   }
 } 
