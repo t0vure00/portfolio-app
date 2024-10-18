@@ -5,14 +5,14 @@ import PageButtons from "../page_buttons/PageButtons";
 import LangButton from "../lang_button/LangButton";
 
 export default function Header(props) {
-  const { general_data, page_spec_data, handleLangButtonClick, handlePageButtonClick, 
+  const { general_data, page_data, handleLangButtonClick, handlePageButtonClick, 
           activePage, lang, titles, onSearchFieldChange, handleSearchButtonClick} = props;
 
   return (activePage===2) ?
     (
       <div className={ styles.header }>
         <div className={ styles.header__title }>{ 
-                page_spec_data.label.title.toUpperCase() }</div>
+                page_data.label.title.toUpperCase() }</div>
         <div className={ styles.header__buttons }>
           <div className={ styles.header__buttons__upper }>
             <ContactMe text={ general_data.label.contact_me }></ContactMe>
@@ -22,9 +22,9 @@ export default function Header(props) {
             <div className={ styles.buttons }>
               <div className={ styles.search_block_container }>
                 <div className={ styles.search_button } onClick={ handleSearchButtonClick }>
-                  { page_spec_data.button.search }
+                  { page_data.button.search }
                 </div>
-                <input type="text" name="search" placeholder={ page_spec_data.label.search }
+                <input type="text" name="search" placeholder={ page_data.label.search }
                         onChange={onSearchFieldChange}/>
               </div>
               <PageButtons handleClick={ handlePageButtonClick } 
@@ -37,7 +37,7 @@ export default function Header(props) {
   :(
     <div className={ styles.header }>
       <div className={ styles.header__title }>{ 
-              page_spec_data.label.title.toUpperCase() }</div>
+              page_data.label.title.toUpperCase() }</div>
       <div className={ styles.header__buttons }>
         <div className={ styles.header__buttons__upper }>
           <ContactMe text={ general_data.label.contact_me }></ContactMe>

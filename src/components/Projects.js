@@ -3,8 +3,8 @@ import Header from './/header/Header';
 import ProjectBlock from "./project_block/ProjectBlock";
 
 export default function Projects(props){
-  const texts = props.page_spec_data;
-  let projects = props.projects;
+  const texts = props.page_data;
+  const projects = props.projects;
 
   return (
     <div className="projects">

@@ -27,8 +27,10 @@ const genFiLTextRef = doc(db, 'general_fi', 'label');
 const genFiLTextSnapshot = await getDoc(genFiLTextRef);
 
 
-const frontpageLTextRef = doc(db, 'frontpage', 'label');
-const frontpageLTextSnapshot = await getDoc(frontpageLTextRef);
+const frontpageFiLTextRef = doc(db, 'frontpage_fi', 'label');
+const frontpageFiLTextSnapshot = await getDoc(frontpageFiLTextRef);
+const frontpageEnLTextRef = doc(db, 'frontpage_en', 'label');
+const frontpageEnLTextSnapshot = await getDoc(frontpageEnLTextRef);
 
 
 const proEnBTextRef = doc(db, 'projects_en', 'button');
@@ -103,10 +105,18 @@ function getGeneralFiTexts(){
 }
 
 
-function getFrontpageTexts() {
-  if(frontpageLTextSnapshot.exists){
+function getFrontpageFiTexts() {
+  if(frontpageFiLTextSnapshot.exists){
     return {
-      label: frontpageLTextSnapshot.data() 
+      label: frontpageFiLTextSnapshot.data() 
+    };
+  }
+}
+
+function getFrontpageEnTexts() {
+  if(frontpageEnLTextSnapshot.exists){
+    return {
+      label: frontpageEnLTextSnapshot.data() 
     };
   }
 }
@@ -239,6 +249,6 @@ function getBackgroundEnTexts(){
 }
 
 
-export { getGeneralEnTexts, getGeneralFiTexts, getFrontpageTexts, 
-        getProjectsEnTexts, getProjectsFiTexts, getBackgroundFiTexts, 
-        getBackgroundEnTexts };
+export { getGeneralEnTexts, getGeneralFiTexts, getFrontpageFiTexts, 
+        getFrontpageEnTexts, getProjectsEnTexts, getProjectsFiTexts, 
+        getBackgroundFiTexts, getBackgroundEnTexts };

@@ -13,7 +13,7 @@ export default function Background(props){
     return to_add_to;
   }
 
-  const { label, education, experience } = props.page_spec_data;
+  const { label, education, experience } = props.page_data;
   const education_list = addEmptyIndexes(education);
   const experience_list = addEmptyIndexes(experience);
 
