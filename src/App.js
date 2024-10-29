@@ -58,7 +58,12 @@ function App() {
     
     if(filter_words!==undefined){
       filtered_projects = projects.filter((project) => 
-              project.technologies.toLowerCase().includes(filter_words.toLowerCase())); 
+              project.technologies.toLowerCase().includes(filter_words.toLowerCase()));
+      if(filtered_projects.length===0){
+        filtered_projects[0] = {
+          description: "No projects found with search word: " + filter_words,
+        }
+      }
     }
     else {
       filtered_projects = projects.slice(0, 3);
