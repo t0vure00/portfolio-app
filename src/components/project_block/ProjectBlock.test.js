@@ -29,7 +29,7 @@ afterEach(() => {
 
 describe("<ProjectBlock />", () => {
 
-  test("should return an empty component with empty elements", () => {
+  test("should return an empty component with empty elements when project undefined", () => {
     act(() => {
       createRoot(container).render(<ProjectBlock project={ undefined } >  
               </ProjectBlock>);
@@ -42,6 +42,26 @@ describe("<ProjectBlock />", () => {
     expect(img_element).toBeInTheDocument();
     expect(tech_element).not.toHaveTextContent();
     expect(tech_title_element).toBeEmptyDOMElement();
+    expect(desc_element).not.toHaveTextContent();
+    expect(desc_title_element).toBeEmptyDOMElement();
+  });
+
+  test("should return an empty component with desc title as no projects found when no projects found in description", () => {
+    act(() => {
+      createRoot(container).render(<ProjectBlock 
+              project={ {
+                      description: "No projects found with search word.",
+              }} >  
+        </ProjectBlock>);
+    });
+    const img_element = container.getElementsByClassName('project_block__project_img__no_zoom')[0];
+    const tech_element = container.getElementsByClassName('project_block__tech_stack')[0];
+    const tech_title_element = container.getElementsByClassName('project_block__title')[0];
+    const desc_element = container.getElementsByClassName('project_block__description')[0];
+    const desc_title_element = container.getElementsByClassName('project_block__title')[1];
+    expect(img_element).toBeInTheDocument();
+    expect(tech_element).not.toHaveTextContent();
+    expect(tech_title_element).toHaveTextContent("No projects found with search word.");
     expect(desc_element).not.toHaveTextContent();
     expect(desc_title_element).toBeEmptyDOMElement();
   });
