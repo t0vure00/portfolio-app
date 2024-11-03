@@ -2,7 +2,7 @@ import React, {act} from 'react';
 import { createRoot } from 'react-dom/client';
 import { screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Frontpage from './Frontpage';
+import Homepage from './Homepage';
 
 
 const general_data = {
@@ -52,12 +52,12 @@ afterEach(() => {
   container = null;
 });
 
-describe("<Frontpage />", () => {
+describe("<Homepage />", () => {
   test("should display about me text", () => {
     act(() => {
       createRoot(container).render(
         <MemoryRouter>
-          <Frontpage {...data}></Frontpage>
+          <Homepage {...data}></Homepage>
         </MemoryRouter>
     );
     });
@@ -68,7 +68,7 @@ describe("<Frontpage />", () => {
     act(() => {
       createRoot(container).render(
         <MemoryRouter>
-          <Frontpage {...data}></Frontpage>
+          <Homepage {...data}></Homepage>
         </MemoryRouter>
     );
     });
