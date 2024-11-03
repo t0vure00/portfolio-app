@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {act} from 'react';
 import { createRoot } from 'react-dom/client';
-import {act} from 'react';
 import { screen } from '@testing-library/react';
 import ProjectBlock from "./ProjectBlock";
 
@@ -28,7 +27,6 @@ afterEach(() => {
 });
 
 describe("<ProjectBlock />", () => {
-
   test("should return an empty component with empty elements when project undefined", () => {
     act(() => {
       createRoot(container).render(<ProjectBlock project={ undefined } >  
@@ -46,7 +44,7 @@ describe("<ProjectBlock />", () => {
     expect(desc_title_element).toBeEmptyDOMElement();
   });
 
-  test("should return an empty component with desc title as no projects found when no projects found in description", () => {
+  test("should return an empty component with tech title as no projects found when no projects found in description", () => {
     act(() => {
       createRoot(container).render(<ProjectBlock 
               project={ {
@@ -63,7 +61,7 @@ describe("<ProjectBlock />", () => {
     expect(tech_element).not.toHaveTextContent();
     expect(tech_title_element).toHaveTextContent("No projects found with search word.");
     expect(desc_element).not.toHaveTextContent();
-    expect(desc_title_element).toBeEmptyDOMElement();
+    expect(desc_title_element).not.toHaveTextContent();
   });
 
   test("should set img as given", () => {

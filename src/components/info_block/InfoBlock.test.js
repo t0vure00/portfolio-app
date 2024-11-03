@@ -1,6 +1,6 @@
-import React from "react";
+import React, {act} from 'react';
+// import {act} from 'react';
 import { createRoot } from 'react-dom/client';
-import {act} from 'react';
 import { screen } from '@testing-library/react';
 import InfoBlock from "./InfoBlock";
 

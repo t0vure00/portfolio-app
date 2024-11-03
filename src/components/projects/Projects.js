@@ -1,6 +1,6 @@
 import React from "react";
-import Header from './/header/Header';
-import ProjectBlock from "./project_block/ProjectBlock";
+import Header from '../header/Header';
+import ProjectBlock from "../project_block/ProjectBlock";
 
 export default function Projects(props){
   const texts = props.page_data;

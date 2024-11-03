@@ -1,14 +1,13 @@
-import React from "react";
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 import './App.css';
+import { Routes, Route } from "react-router-dom";
 import { getGeneralEnTexts, getGeneralFiTexts, getFrontpageFiTexts, 
         getFrontpageEnTexts, getProjectsEnTexts, getProjectsFiTexts, 
         getBackgroundFiTexts, getBackgroundEnTexts } from './components/firebase/Firebase';
-import { Routes, Route } from "react-router-dom";
 import ErrorPage404 from "./components/ErrorPage";
-import Frontpage from "./components/Frontpage";
-import Projects from "./components/Projects";
-import Background from "./components/Background";
+import Frontpage from "./components/frontpage/Frontpage";
+import Projects from "./components/projects/Projects";
+import Background from "./components/background/Background";
 
 
 const general_texts_fi = getGeneralFiTexts();
