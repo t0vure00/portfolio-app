@@ -1,5 +1,4 @@
 import React, {act} from 'react';
-// import {act} from 'react';
 import { createRoot } from 'react-dom/client';
 import { screen } from '@testing-library/react';
 import InfoBlock from "./InfoBlock";
@@ -30,7 +29,7 @@ describe("<InfoBlock />", () => {
       createRoot(container).render(
               <InfoBlock data_to_display={ undefined } ></InfoBlock>);
     });
-    const title_element = container.getElementsByClassName('title')[0];
+    const title_element = container.getElementsByClassName('info_block__title')[0];
     expect(title_element).toBeInTheDocument();
     expect(title_element).toHaveTextContent('');
   });

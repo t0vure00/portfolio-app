@@ -1,8 +1,9 @@
-.background_info {
+.background__info {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  
   height: 95%;
   width: 45%;
   border-radius: 20px;

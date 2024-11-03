@@ -1,17 +1,17 @@
 import React from 'react';
-import styles from './Frontpage.module.css';
+import styles from './Homepage.module.css';
 import Header from '../header/Header';
 
 export default function Frontpage(props){
   return (
-    <div className="frontpage">
+    <div className="homepage">
       <Header {...props}></Header>
       <div className="page_background">
-        <div className={ styles.animation }>
-          <div className={ styles.greeting }>
+        <div className={ styles.homepage__animation }>
+          <div className={ styles.homepage__greeting }>
             { props.page_data.label.greeting }
           </div> 
-          <div className={ styles.about_me }>
+          <div className={ styles.homepage__about_me }>
             { props.page_data.label.about_me }
           </div>
         </div>

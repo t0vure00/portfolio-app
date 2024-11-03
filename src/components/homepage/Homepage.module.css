@@ -1,4 +1,4 @@
-.animation {
+.homepage__animation {
   position: absolute;
   justify-self: center;
   align-content: center;
@@ -15,7 +15,7 @@
   animation-duration: 7s;
 }
 
-.greeting {
+.homepage__greeting {
   padding: 20px;
 
   font-size: 100px;
@@ -23,7 +23,7 @@
   text-shadow: -2px 2px 4px grey;
 }
 
-.about_me {
+.homepage__about_me {
   padding-left: 30px;
   padding-right: 30px;
   font-size: 20px;
@@ -110,9 +110,7 @@
 
   background-color: white; 
 
-  /* transform: rotate(-810deg); */
   transform: rotate(-360deg);
-
   content-visibility: hidden;
   }
 }

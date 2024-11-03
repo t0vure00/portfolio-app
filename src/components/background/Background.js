@@ -21,7 +21,7 @@ export default function Background(props){
     <div className="background">
       <Header {...props}></Header>
       <div className="page_background">
-        <div className={ styles.background_info }>
+        <div className={ styles.background__info }>
           { label.edu_title }
           {
             education_list.map((edu, index)  => {
@@ -30,7 +30,7 @@ export default function Background(props){
             })
           }
         </div>
-        <div className={ styles.background_info }>
+        <div className={ styles.background__info }>
           { label.exp_title }
           {
             experience_list.map((exp, index)  => {
