@@ -1,7 +1,7 @@
-import React from "react";
+import React, {act} from 'react';
 import { createRoot } from 'react-dom/client';
-import {act} from 'react';
 import { screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Header from "./Header";
 
 
@@ -29,6 +29,15 @@ const frontpage_data = {
   }
 };
 
+const projects_page_data = {
+  label: {
+    title: "Projektit"
+  },
+  button: {
+    search: "Hae"
+  }
+};
+
 const titles_fi = ['etusivu', 'projektit', 'tausta'];
 
 let container = null;
@@ -46,13 +55,43 @@ afterEach(() => {
 describe("<Header />", () => {
   test("should set title as Portfolio when set so", () => {
     act(() => {
-      createRoot(container).render(<Header general_data={general_data} 
-              frontpage_data={frontpage_data} handlePageButtonClick={null} 
-              handleLangButtonClick={null} activePage={0} lang={'FIEN'}
-              titles= { titles_fi }>
-              </Header>);
+      createRoot(container).render(
+        <MemoryRouter>
+          <Header general_data={general_data} 
+                  page_data={frontpage_data} handleLangButtonClick={null}
+                  handlePageButtonClick={null} activePage={0} lang={'FIEN'}
+                  titles= { titles_fi }>
+          </Header>
+        </MemoryRouter>);
     });
-    const title_element = screen.getByText(/Portfolio/i);
-    expect(title_element).toBeInTheDocument();
+    expect(screen.getByText(/Portfolio/i)).toBeInTheDocument();
+  });
+
+  test("should have a search bar when active page is 2", () => {
+    act(() => {
+      createRoot(container).render(
+        <MemoryRouter>
+          <Header general_data={general_data} 
+                  page_data={projects_page_data} handleLangButtonClick={null}
+                  handlePageButtonClick={null} activePage={2} lang={'FIEN'}
+                  titles= { titles_fi }>
+          </Header>
+        </MemoryRouter>);
+    });
+    expect(screen.getByText(/Hae/i)).toBeInTheDocument();
+  });
+
+  test("should not have a search bar when active page is other than 2", () => {
+    act(() => {
+      createRoot(container).render(
+        <MemoryRouter>
+          <Header general_data={general_data} 
+                  page_data={projects_page_data} handleLangButtonClick={null}
+                  handlePageButtonClick={null} activePage={0} lang={'FIEN'}
+                  titles= { titles_fi }>
+          </Header>
+        </MemoryRouter>);
+    });
+    expect(screen.queryByText(/Hae/i)).not.toBeInTheDocument();
   });
 });

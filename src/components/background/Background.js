@@ -1,22 +1,22 @@
 import React from "react";
-import Header from './header/Header';
 import styles from './Background.module.css';
-import InfoBlock from "./info_block/InfoBlock";
+import Header from '../header/Header';
+import InfoBlock from "../info_block/InfoBlock";
+
+function addEmptyIndexes(to_add_to){
+  if(to_add_to.length<3){
+    for(let i = to_add_to.length; i<3; i++){
+      to_add_to[i] = undefined;
+    }
+  }
+  return to_add_to;
+}
 
 export default function Background(props){
-  function addEmptyIndexes(to_add_to){
-    if(to_add_to.length<3){
-      for(let i = to_add_to.length; i<3; i++){
-        to_add_to[i] = undefined;
-      }
-    }
-    return to_add_to;
-  }
-
   const { label, education, experience } = props.page_data;
   const education_list = addEmptyIndexes(education);
   const experience_list = addEmptyIndexes(experience);
-
+  
   return (
     <div className="background">
       <Header {...props}></Header>
