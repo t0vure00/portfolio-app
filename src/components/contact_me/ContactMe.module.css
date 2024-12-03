@@ -31,3 +31,22 @@ a {
     align-content: center;
     text-align: center;
 }
+
+@media only screen and (max-width: 600px) {
+  .contact_me {
+    padding-bottom: 8px;
+  }
+
+  .contact_me__text {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .contact_me__button {
+    height: 35px;
+    width: 90px;
+
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
