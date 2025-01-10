@@ -10,10 +10,10 @@ body {
 
 .page_background {
   position: relative;
-
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+
   height: 600px;
   max-width: 1300px;
   min-width: 900px;
@@ -24,4 +24,28 @@ body {
   margin-right: auto;
 
   background-color: #FFFFFF;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    margin: 4px;
+  }
+
+  .page_background {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 500px;
+    max-width: 600px;
+    min-width: 300px;
+    width: 95%;
+    border-radius: 20px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    margin-left: auto;
+    margin-right: auto;
+  
+    background-color: #FFFFFF;
+  }
 }

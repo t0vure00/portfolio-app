@@ -47,3 +47,21 @@
 .lang_button__dropdown:hover .lang_button__dropbtn {
   display: block;
 }
+
+@media only screen and (max-width: 600px) {
+  .lang_button__dropdown {
+    height: 35px;
+    width: 35px;
+  
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .lang_button__dropbtn {
+    height: 35px;
+    width: 35px;
+  
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
