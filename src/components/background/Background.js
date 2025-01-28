@@ -22,22 +22,27 @@ export default function Background(props){
       <Header {...props}></Header>
       <div className="page_background">
         <div className={ styles.background__info }>
-          { label.edu_title }
+          <span className={ styles.title }>{ label.edu_title }</span>
+          <div className={ styles.background__scroll }>
           {
             education_list.map((edu, index)  => {
-              return ( <InfoBlock key={ ('education_' + index) } 
-                      data_to_display={ edu } ></InfoBlock> );
+              return (<InfoBlock key={ ('education_' + index) }
+                      data_to_display={ edu } styles={ {display: "none"} }>
+                      </InfoBlock>);
             })
           }
+          </div>
         </div>
         <div className={ styles.background__info }>
-          { label.exp_title }
+          <span className={ styles.title }>{ label.exp_title }</span>
+          <div className={ styles.background__scroll }>
           {
             experience_list.map((exp, index)  => {
               return ( <InfoBlock key={ ('experience_' + index) } 
                       data_to_display={ exp } ></InfoBlock> );
             })
           }
+          </div>
         </div>
       </div>
     </div>

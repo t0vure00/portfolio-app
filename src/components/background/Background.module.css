@@ -13,3 +13,41 @@
   
   font-weight: 600;
 }
+
+.background__scroll{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 90%;
+  width: 100%;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .background__info {
+    justify-content: flex-start;
+
+    height: 45%;
+    width: 90%;
+
+    font-size: 15px;
+  }
+
+  .background__scroll {
+    height: 75%;
+    width: 95%;
+    padding: 8px;
+  
+    text-align: center;
+  
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .title {
+    padding-top: 5px;
+    padding-bottom: 2px;
+  }
+}
