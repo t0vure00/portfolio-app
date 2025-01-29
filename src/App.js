@@ -49,7 +49,7 @@ function App() {
   function getCurrentActivePage() {
     const current_page = window.location.href;
     return current_page.endsWith('background') ? 1 : 
-            current_page.endsWith('projects') ? 2 : 0;
+                  current_page.endsWith('projects') ? 2 : 0;
   }
 
   function getProjects(filter_words=undefined, projects){
