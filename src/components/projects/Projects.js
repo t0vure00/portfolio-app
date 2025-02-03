@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Projects.module.css";
 import Header from '../header/Header';
 import ProjectBlock from "../project_block/ProjectBlock";
 
@@ -10,14 +11,16 @@ export default function Projects(props){
     <div className="projects">
       <Header {...props}></Header>
       <div className="page_background">
-        {
-          projects.map((project, index) => {
-            return (
-              <ProjectBlock key={ ('project_' + index) }project={ project } index={ index } 
-                      label={ texts.label }></ProjectBlock>
-            );
-          })
-        }
+        <div className={ styles.background__scroll }>
+          {
+            projects.map((project, index) => {
+              return (
+                <ProjectBlock key={ ('project_' + index) }project={ project }
+                        index={ index } label={ texts.label }></ProjectBlock>
+              );
+            })
+          }
+        </div>
       </div>
     </div>
   );

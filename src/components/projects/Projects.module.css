@@ -1,13 +1,4 @@
-body {
-  width: 100%;
-  margin-top: 0px;
-
-  background-color: #d2d2d2;
-
-  font-family: "Roboto", sans-serif;
-}
-
-.page_background {
+.background__scroll {
   position: relative;
   display: flex;
   justify-content: space-evenly;
@@ -15,24 +6,28 @@ body {
 
   height: 600px;
   max-width: 1300px;
-  min-width: 950px;
-  width: 95%;
+  min-width: 900px;
+  width: 100%;
   border-radius: 20px;
   border-top-right-radius: 0px;
   margin-left: auto;
   margin-right: auto;
-
-  background-color: #FFFFFF;
 }
 
 @media only screen and (max-width: 600px) {
-  .page_background {
+  .background__scroll {
     flex-direction: column;
 
-    height: 500px;
+    height: 75%;
     max-width: 600px;
     min-width: 300px;
     width: 95%;
+    padding: 8px;
     border-top-left-radius: 0px;
+  
+    text-align: center;
+  
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }
