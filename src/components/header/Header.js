@@ -5,8 +5,8 @@ import PageButtons from "../page_buttons/PageButtons";
 import LangButton from "../lang_button/LangButton";
 
 export default function Header(props) {
-  const { general_data, page_data, handleLangButtonClick, handlePageButtonClick, 
-          activePage, lang, titles, onSearchFieldChange, handleSearchButtonClick} = props;
+  const { general_data, page_data, handleLangButtonClick, activePage, 
+          lang, titles, onSearchFieldChange, handleSearchButtonClick} = props;
 
   return (activePage===2) ?
     (
@@ -27,8 +27,7 @@ export default function Header(props) {
                 <input type="text" name="search" placeholder={ page_data.label.search }
                         onChange={onSearchFieldChange}/>
               </div>
-              <PageButtons handleClick={ handlePageButtonClick } 
-                      activePageIndex={ activePage } titles={ titles }>
+              <PageButtons activePageIndex={ activePage } titles={ titles }>
               </PageButtons>
             </div>
         </div>
@@ -44,8 +43,7 @@ export default function Header(props) {
           <LangButton lang={ lang } handleClick={ handleLangButtonClick }>
           </LangButton>
         </div>
-        <PageButtons handleClick={ handlePageButtonClick } 
-                activePageIndex={ activePage } titles={ titles }>
+        <PageButtons activePageIndex={ activePage } titles={ titles }>
         </PageButtons>
       </div>
     </div>
