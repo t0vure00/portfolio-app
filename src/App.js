@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import { getGeneralEnTexts, getGeneralFiTexts, getFrontpageFiTexts, 
@@ -20,37 +20,14 @@ const background_texts_fi = getBackgroundFiTexts();
 const background_texts_en = getBackgroundEnTexts();
 
 
-const useBackForwardButton = (callback) => {
-  const handleBackAndForwardButtons = useCallback(callback, [callback]);
-
-  useEffect(() => {
-    window.addEventListener('popstate', handleBackAndForwardButtons);
-    return () => {
-      window.removeEventListener('popstate', handleBackAndForwardButtons);
-    };
-  }, [handleBackAndForwardButtons]);
-};
-
-
 function App() {
   const [genData, setGenData] = useState(general_texts_fi);
   const [homepageData, setHomepageData] = useState(homepage_texts_fi);
   const [projectsData, setProjectsData] = useState(projects_texts_fi);
   const [backgroundData, setBackgroundData] = useState(background_texts_fi);
   const [lang, setLang] = useState(genData.button.lang_choice_fi)
-  const [activePage, setActivePage] = useState(getCurrentActivePage());
   const [projects, setProjects] = useState(projects_texts_fi.projects.slice(0, 3));
   const [searchTerm, setSearchTerm] = useState("");
-
-  const handleBackAndForwardButtons = () => {
-    setActivePage(getCurrentActivePage());
-  };
-
-  function getCurrentActivePage() {
-    const current_page = window.location.href;
-    return current_page.endsWith('background') ? 1 : 
-                  current_page.endsWith('projects') ? 2 : 0;
-  }
 
   function getProjects(filter_words=undefined, projects){
     let filtered_projects = [];
@@ -85,12 +62,6 @@ function App() {
       setProjects(getProjects(undefined, projects_texts_en.projects));
     }
   }
-
-  function handlePageButtonClick(type){
-    if(type!==activePage){
-      setActivePage(type);
-    }
-  }
   
   function handleLangButtonClick(){
     const new_lang = isLanguageFinnish() ? genData.button.lang_en
@@ -116,24 +87,23 @@ function App() {
     }
   }
 
-  useBackForwardButton(handleBackAndForwardButtons);
-
   let dataForHomePage = {
     general_data: genData,
     page_data: homepageData,
-    handlePageButtonClick: handlePageButtonClick,
     handleLangButtonClick: handleLangButtonClick,
-    activePage: activePage,
+    activePage: 0,
     lang: lang,
     titles: [genData.button.frontpage, genData.button.background, genData.button.projects]
   };
 
   let dataForBackgroundPage = { ...dataForHomePage };
   dataForBackgroundPage.page_data = backgroundData;
+  dataForBackgroundPage.activePage = 1;
 
   let dataForProjectsPage = { ...dataForHomePage };
   dataForProjectsPage.page_data = projectsData;
   dataForProjectsPage.projects = projects;
+  dataForProjectsPage.activePage = 2;
   dataForProjectsPage.onSearchFieldChange = onSearchFieldChange;
   dataForProjectsPage.handleSearchButtonClick = handleSearchButtonClick;
 
