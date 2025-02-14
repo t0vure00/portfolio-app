@@ -6,7 +6,7 @@ import LangButton from "../lang_button/LangButton";
 
 export default function Header(props) {
   const { general_data, page_data, handleLangButtonClick, activePage, 
-          lang, titles, onSearchFieldChange, handleSearchButtonClick} = props;
+          lang, titles, onSearchFieldChange, handleSearchClick} = props;
 
   return (activePage===2) ?
     (
@@ -21,7 +21,7 @@ export default function Header(props) {
           </div>
             <div className={ styles.buttons }>
               <div className={ styles.search_block_container }>
-                <div className={ styles.search_button } onClick={ handleSearchButtonClick }>
+                <div className={ styles.search_button } onClick={ handleSearchClick }>
                   { page_data.button.search }
                 </div>
                 <input type="text" name="search" placeholder={ page_data.label.search }

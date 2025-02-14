@@ -19,7 +19,7 @@
 
 .lang_button__dropbtn {
   position: absolute;
-  left: -1px;
+  left: -0.5px;
 
   display: none;
   box-sizing: border-box;
@@ -58,6 +58,8 @@
   }
   
   .lang_button__dropbtn {
+    left: -1px;
+
     height: 35px;
     width: 35px;
   

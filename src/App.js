@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import { getGeneralEnTexts, getGeneralFiTexts, getFrontpageFiTexts, 
@@ -10,84 +10,128 @@ import Projects from "./components/projects/Projects";
 import Background from "./components/background/Background";
 
 
-const general_texts_fi = getGeneralFiTexts();
-const general_texts_en = getGeneralEnTexts();
-const homepage_texts_fi = getFrontpageFiTexts();
-const homepage_texts_en = getFrontpageEnTexts();
-const projects_texts_fi = getProjectsFiTexts();
-const projects_texts_en = getProjectsEnTexts();
-const background_texts_fi = getBackgroundFiTexts();
-const background_texts_en = getBackgroundEnTexts();
+const generalTextsFi = getGeneralFiTexts();
+const generalTextsEn = getGeneralEnTexts();
+const homepageTextsFi = getFrontpageFiTexts();
+const homepageTextsEn = getFrontpageEnTexts();
+const projectsTextsFi = getProjectsFiTexts();
+const projectsTextsEn = getProjectsEnTexts();
+const backgroundTextsFi = getBackgroundFiTexts();
+const backgroundTextsEn = getBackgroundEnTexts();
+
+function setProjectsInitialVisibility(){
+  projectsTextsFi.projects = setProjectsVis(projectsTextsFi.projects, 0);
+}
+
+function setProjectsVis(projects, startingIndex){
+  let tempProjects = JSON.parse(JSON.stringify(projects));
+  let upperLimit = startingIndex + (window.innerWidth>600 ? 2 : projectsTextsFi.projects.length);
+  for (let i = 0; i<tempProjects.length; i++){
+    tempProjects[i].visibility = (i>=startingIndex && i<=upperLimit) ? true : false;
+  }
+  return tempProjects;
+}
 
 
 function App() {
-  const [genData, setGenData] = useState(general_texts_fi);
-  const [homepageData, setHomepageData] = useState(homepage_texts_fi);
-  const [projectsData, setProjectsData] = useState(projects_texts_fi);
-  const [backgroundData, setBackgroundData] = useState(background_texts_fi);
+  setProjectsInitialVisibility();
+  let projectsIndex = 0;
+  const [genData, setGenData] = useState(generalTextsFi);
+  const [homepageData, setHomepageData] = useState(homepageTextsFi);
+  const [projectsData, setProjectsData] = useState(projectsTextsFi);
+  const [backgroundData, setBackgroundData] = useState(backgroundTextsFi);
   const [lang, setLang] = useState(genData.button.lang_choice_fi)
-  const [projects, setProjects] = useState(projects_texts_fi.projects.slice(0, 3));
+  const [projects, setProjects] = useState(projectsTextsFi.projects);
   const [searchTerm, setSearchTerm] = useState("");
 
-  function getProjects(filter_words=undefined, projects){
-    let filtered_projects = [];
-    
-    if(filter_words!==undefined){
-      filtered_projects = projects.filter((project) => 
-              project.technologies.toLowerCase().includes(filter_words.toLowerCase()));
-      if(filtered_projects.length===0){
-        filtered_projects[0] = {
-          description: "No projects found with search word: " + filter_words,
+
+  useEffect(() => {
+    function handleWindowResize() {
+      let tempProjects = JSON.parse(JSON.stringify(projects));
+      let upperLimit = projectsIndex + (window.innerWidth>600 ? 2 : projectsTextsFi.projects.length);
+      for (let i = 0; i<tempProjects.length; i++){
+        tempProjects[i].visibility = (i>=projectsIndex && i<=upperLimit) ? true : false;
+      }
+      setProjects(tempProjects);
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, [projects, projectsIndex]);
+
+  
+  function updateData(lang){
+    if(lang===genData.button.lang_fi){
+      setGenData(generalTextsFi);
+      setHomepageData(homepageTextsFi);
+      setProjectsData(projectsTextsFi);
+      setBackgroundData(backgroundTextsFi);
+      filterAndSetProjects(undefined, projectsTextsFi.projects);
+    }else{
+      setGenData(generalTextsEn);
+      setHomepageData(homepageTextsEn);
+      setProjectsData(projectsTextsEn);
+      setBackgroundData(backgroundTextsEn);
+      filterAndSetProjects(undefined, projectsTextsEn.projects);
+    }
+  }
+
+  function filterAndSetProjects(searchWord=undefined, projects){
+    let filteredProjects = projects;
+    if(searchWord!==undefined){
+      filteredProjects = projects.filter((project) => 
+              project.technologies.toLowerCase().includes(searchWord.toLowerCase()));
+      if(filteredProjects.length===0){
+        filteredProjects[0] = {
+          description: "No projects found with search word: " + searchWord,
         }
       }
     }
-    else {
-      filtered_projects = projects.slice(0, 3);
-    }
-    return filtered_projects;
-  }
-
-  function updateData(lang){
-    if(lang===genData.button.lang_fi){
-      setGenData(general_texts_fi);
-      setHomepageData(homepage_texts_fi);
-      setProjectsData(projects_texts_fi);
-      setBackgroundData(background_texts_fi);
-      setProjects(getProjects(undefined, projects_texts_fi.projects));
-    }else{
-      setGenData(general_texts_en);
-      setHomepageData(homepage_texts_en);
-      setProjectsData(projects_texts_en);
-      setBackgroundData(background_texts_en);
-      setProjects(getProjects(undefined, projects_texts_en.projects));
-    }
+    setProjects(setProjectsVis(filteredProjects, projectsIndex));
   }
   
   function handleLangButtonClick(){
-    const new_lang = isLanguageFinnish() ? genData.button.lang_en
+    const new_lang = isLangFi() ? genData.button.lang_en
             : genData.button.lang_fi;
     setLang(new_lang);
     updateData(new_lang);
   }
 
-  function isLanguageFinnish(){
+  function isLangFi(){
     return lang===genData.button.lang_fi;
   }
 
   function handleSearchButtonClick(){
-    const projects = isLanguageFinnish() ? projects_texts_fi.projects : projects_texts_en.projects;
-    setProjects(getProjects(searchTerm, projects));
+    filterAndSetProjects(searchTerm, getAllProjects());
+  }
+
+  function getAllProjects(){
+    return isLangFi() ? projectsTextsFi.projects
+            : projectsTextsEn.projects;
   }
 
   function onSearchFieldChange(event){
     setSearchTerm(event.target.value);
     if(event.target.value===""){
-      const projects = isLanguageFinnish() ? projects_texts_fi.projects : projects_texts_en.projects;
-      setProjects(getProjects(undefined, projects));
+      projectsIndex = 0;
+      filterAndSetProjects(undefined, getAllProjects());
     }
   }
 
-  let dataForHomePage = {
+  function handleProjectsClick(id){
+    if(projects.length < 3){
+      return; 
+    }
+
+    projectsIndex = (id===0) ? (projectsIndex < 1 ? projectsIndex : -1) 
+            : (projectsIndex >= projects.length ? projectsIndex : +1);
+    filterAndSetProjects(undefined, projects);
+  }
+
+  let homePageData = {
     general_data: genData,
     page_data: homepageData,
     handleLangButtonClick: handleLangButtonClick,
@@ -96,23 +140,24 @@ function App() {
     titles: [genData.button.frontpage, genData.button.background, genData.button.projects]
   };
 
-  let dataForBackgroundPage = { ...dataForHomePage };
-  dataForBackgroundPage.page_data = backgroundData;
-  dataForBackgroundPage.activePage = 1;
+  let backgroundPageData = { ...homePageData };
+  backgroundPageData.page_data = backgroundData;
+  backgroundPageData.activePage = 1;
 
-  let dataForProjectsPage = { ...dataForHomePage };
-  dataForProjectsPage.page_data = projectsData;
-  dataForProjectsPage.projects = projects;
-  dataForProjectsPage.activePage = 2;
-  dataForProjectsPage.onSearchFieldChange = onSearchFieldChange;
-  dataForProjectsPage.handleSearchButtonClick = handleSearchButtonClick;
+  let projectsPageData = { ...homePageData };
+  projectsPageData.page_data = projectsData;
+  projectsPageData.projects = projects;
+  projectsPageData.activePage = 2;
+  projectsPageData.onSearchFieldChange = onSearchFieldChange;
+  projectsPageData.handleSearchClick = handleSearchButtonClick;
+  projectsPageData.handleProjectsClick = handleProjectsClick;
 
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Homepage { ...dataForHomePage } />} />
-        <Route path="/background" element={<Background { ...dataForBackgroundPage }/>} />
-        <Route path="/projects" element={<Projects { ...dataForProjectsPage } />} />
+        <Route path="/" element={<Homepage { ...homePageData } />} />
+        <Route path="/background" element={<Background { ...backgroundPageData }/>} />
+        <Route path="/projects" element={<Projects { ...projectsPageData } />} />
         <Route path="*" element={<ErrorPage404 />} />
       </Routes>
     </div>
