@@ -11,16 +11,18 @@ export default function Projects(props){
     <div className="projects">
       <Header {...props}></Header>
       <div className="page_background">
+        <div className={ styles.carousel_arrow_prev } onClick={ () => props.handleProjectsClick(0) }></div>
         <div className={ styles.background__scroll }>
           {
             projects.map((project, index) => {
               return (
-                <ProjectBlock key={ ('project_' + index) }project={ project }
+                <ProjectBlock key={ ('project_' + index) } project={ project }
                         index={ index } label={ texts.label }></ProjectBlock>
               );
             })
           }
         </div>
+        <div className={ styles.carousel_arrow_next } onClick={ () => props.handleProjectsClick(1) }></div>
       </div>
     </div>
   );

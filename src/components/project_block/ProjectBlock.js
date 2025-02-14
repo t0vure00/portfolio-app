@@ -10,7 +10,8 @@ export default function ProjectBlock({ project, index, label }){
         </div>
         <div className={ styles.project_block__tech_stack }>
           <div className={ styles.project_block__title } >
-            { (project!==undefined && project.description.match("No projects found")) ? project.description : "" }
+            { (project!==undefined && project.description.match("No projects found")) ? 
+                    project.description : "" }
           </div>
         </div>
         <div className={ [styles.project_block__description, 
@@ -21,7 +22,8 @@ export default function ProjectBlock({ project, index, label }){
     );
   }
   return (
-    <div key={ index } className={ styles.project_block }>
+    <div key={ index } className={ [(project.visibility ? styles.project_block : styles.project_block__hidden), 
+            styles.fade].join(" ")}>
       <div className={ styles.project_block__project_img }>
         <img src={ project.link } alt="Not available"></img>
       </div>
