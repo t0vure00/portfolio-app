@@ -11,8 +11,8 @@ export default function LangButton({ lang, handleClick }) {
   
   return (
     <div className={ styles.lang_button__dropdown }>
-      <span data-testid="lang_button__used_lang">{ chosen_lang }</span>
-      <button data-testid="lang_button__second_lang" className={ styles.lang_button__dropbtn }
+      <span>{ chosen_lang }</span>
+      <button className={ styles.lang_button__dropbtn }
               onClick={ handleClick }>{ other_lang }</button>
     </div>
   );
