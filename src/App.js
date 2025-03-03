@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { getGeneralEnTexts, getGeneralFiTexts, getFrontpageFiTexts, 
         getFrontpageEnTexts, getProjectsEnTexts, getProjectsFiTexts, 
         getBackgroundFiTexts, getBackgroundEnTexts } from './components/firebase/Firebase';
-import ErrorPage404 from "./components/ErrorPage";
+import ErrorPage404 from "./components/error_page/ErrorPage";
 import Homepage from "./components/homepage/Homepage";
 import Projects from "./components/projects/Projects";
 import Background from "./components/background/Background";
@@ -152,13 +152,15 @@ function App() {
   projectsPageData.handleSearchClick = handleSearchButtonClick;
   projectsPageData.handleProjectsClick = handleProjectsClick;
 
+  let errorPageData = { ...genData }
+
   return (
     <div>
       <Routes>
         <Route path="/" element={<Homepage { ...homePageData } />} />
         <Route path="/background" element={<Background { ...backgroundPageData }/>} />
         <Route path="/projects" element={<Projects { ...projectsPageData } />} />
-        <Route path="*" element={<ErrorPage404 />} />
+        <Route path="*" element={<ErrorPage404 { ...errorPageData } />} />
       </Routes>
     </div>
   );
