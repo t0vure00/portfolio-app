@@ -61,7 +61,7 @@ describe("<Homepage />", () => {
         </MemoryRouter>
     );
     });
-    expect(container.getElementsByClassName('about_me')[0]).toHaveTextContent("Olen ohjelmoija.");
+    expect(container.getElementsByClassName('homepage__about_me')[0]).toHaveTextContent("Olen ohjelmoija.");
   });
 
   test("should display about me greeting", () => {
@@ -72,6 +72,6 @@ describe("<Homepage />", () => {
         </MemoryRouter>
     );
     });
-    expect(container.getElementsByClassName('greeting')[0]).toHaveTextContent("Hei,");
+    expect(container.getElementsByClassName('homepage__greeting')[0]).toHaveTextContent("Hei,");
   });
 });

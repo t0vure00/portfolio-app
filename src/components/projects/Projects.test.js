@@ -31,22 +31,25 @@ const page_data = {
     {
       description: "Project to make a phone.",
       link: "Link_1",
-      technologies: "C/C++"
+      technologies: "C/C++",
+      visibility: true
     },
     {
-        description: "Project to make a computer.",
-        link: "Link_2",
-        technologies: "HTML, CSS and JavaScript"
+      description: "Project to make a computer.",
+      link: "Link_2",
+      technologies: "HTML, CSS and JavaScript",
+      visibility: true
     },
     {
-        description: "Project to make a computer in minecraft.",
-        link: "Link_3",
-        technologies: "Minecraft"
+      description: "Project to make a computer in minecraft.",
+      link: "Link_3",
+      technologies: "Minecraft",
+      visibility: true
     },
     {
-        description: "Project to make minecraft.",
-        link: "Link_4",
-        technologies: "C++"
+      description: "Project to make minecraft.",
+      link: "Link_4",
+      technologies: "C++"
     }
   ]
 };
@@ -56,7 +59,7 @@ const titles_fi = ['etusivu', 'projektit', 'tausta'];
 const data = {
   general_data: general_data,
   page_data: page_data,
-  projects: page_data.projects.slice(0,3),
+  projects: page_data.projects,
   lang: "FIEN",
   titles: titles_fi
 }
@@ -74,7 +77,7 @@ afterEach(() => {
 });
 
 describe("<Projects />", () => {
-  test("should have 3 project blocks", () => {
+  test("should have 3 visible project blocks", () => {
     act(() => {
       createRoot(container).render(
         <MemoryRouter>
