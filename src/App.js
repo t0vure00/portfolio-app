@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import { getGeneralEnTexts, getGeneralFiTexts, getFrontpageFiTexts, 
-        getFrontpageEnTexts, getProjectsEnTexts, getProjectsFiTexts, 
-        getBackgroundFiTexts, getBackgroundEnTexts } from './components/firebase/Firebase';
+import {
+  getGeneralEnTexts, getGeneralFiTexts, getFrontpageFiTexts,
+  getFrontpageEnTexts, getProjectsEnTexts, getProjectsFiTexts,
+  getBackgroundFiTexts, getBackgroundEnTexts
+} from './components/firebase/Firebase';
 import ErrorPage404 from "./components/error_page/ErrorPage";
 import Homepage from "./components/homepage/Homepage";
 import Projects from "./components/projects/Projects";
@@ -19,23 +21,19 @@ const projectsTextsEn = getProjectsEnTexts();
 const backgroundTextsFi = getBackgroundFiTexts();
 const backgroundTextsEn = getBackgroundEnTexts();
 
-function setProjectsInitialVisibility(){
-  projectsTextsFi.projects = setProjectsVis(projectsTextsFi.projects, 0);
-}
-
-function setProjectsVis(projects, startingIndex){
+function setProjectsVis(projects, startingIndex) {
   let tempProjects = JSON.parse(JSON.stringify(projects));
-  let upperLimit = startingIndex + (window.innerWidth>600 ? 2 : projectsTextsFi.projects.length);
-  for (let i = 0; i<tempProjects.length; i++){
-    tempProjects[i].visibility = (i>=startingIndex && i<=upperLimit) ? true : false;
+  let upperLimit = startingIndex + (window.innerWidth > 600 ? 2 : projects.length);
+  for (let i = 0; i < tempProjects.length; i++) {
+    tempProjects[i].visibility = (i >= startingIndex && i <= upperLimit) ? true : false;
   }
   return tempProjects;
 }
 
 
 function App() {
-  setProjectsInitialVisibility();
-  let projectsIndex = 0;
+  const projectsIndexRef = useRef(0);
+  projectsTextsFi.projects = setProjectsVis(projectsTextsFi.projects, projectsIndexRef.current);
   const [genData, setGenData] = useState(generalTextsFi);
   const [homepageData, setHomepageData] = useState(homepageTextsFi);
   const [projectsData, setProjectsData] = useState(projectsTextsFi);
@@ -47,30 +45,24 @@ function App() {
 
   useEffect(() => {
     function handleWindowResize() {
-      let tempProjects = JSON.parse(JSON.stringify(projects));
-      let upperLimit = projectsIndex + (window.innerWidth>600 ? 2 : projectsTextsFi.projects.length);
-      for (let i = 0; i<tempProjects.length; i++){
-        tempProjects[i].visibility = (i>=projectsIndex && i<=upperLimit) ? true : false;
-      }
-      setProjects(tempProjects);
+      setProjects(setProjectsVis(projects, projectsIndexRef.current));
     }
 
     window.addEventListener('resize', handleWindowResize);
-
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
-  }, [projects, projectsIndex]);
+  }, [projects]);
 
-  
-  function updateData(lang){
-    if(lang===genData.button.lang_fi){
+
+  function updateData(lang) {
+    if (lang === genData.button.lang_fi) {
       setGenData(generalTextsFi);
       setHomepageData(homepageTextsFi);
       setProjectsData(projectsTextsFi);
       setBackgroundData(backgroundTextsFi);
       filterAndSetProjects(undefined, projectsTextsFi.projects);
-    }else{
+    } else {
       setGenData(generalTextsEn);
       setHomepageData(homepageTextsEn);
       setProjectsData(projectsTextsEn);
@@ -79,55 +71,58 @@ function App() {
     }
   }
 
-  function filterAndSetProjects(searchWord=undefined, projects){
-    let filteredProjects = projects;
-    if(searchWord!==undefined){
-      filteredProjects = projects.filter((project) => 
-              project.technologies.toLowerCase().includes(searchWord.toLowerCase()));
-      if(filteredProjects.length===0){
+  function filterAndSetProjects(searchWord = undefined, projects) {
+  let filteredProjects = projects;
+    if (searchWord !== undefined) {
+      filteredProjects = projects.filter((project) =>
+        project.technologies.toLowerCase().includes(searchWord.toLowerCase()));
+      if (filteredProjects.length === 0) {
         filteredProjects[0] = {
           description: "No projects found with search word: " + searchWord,
         }
       }
     }
-    setProjects(setProjectsVis(filteredProjects, projectsIndex));
+    setProjects(setProjectsVis(filteredProjects, projectsIndexRef.current));
   }
-  
-  function handleLangButtonClick(){
+
+  function handleLangButtonClick() {
     const new_lang = isLangFi() ? genData.button.lang_en
-            : genData.button.lang_fi;
+      : genData.button.lang_fi;
     setLang(new_lang);
     updateData(new_lang);
   }
 
-  function isLangFi(){
-    return lang===genData.button.lang_fi;
+  function isLangFi() {
+    return lang === genData.button.lang_fi;
   }
 
-  function handleSearchButtonClick(){
+  function handleSearchButtonClick() {
     filterAndSetProjects(searchTerm, getAllProjects());
   }
 
-  function getAllProjects(){
+  function getAllProjects() {
     return isLangFi() ? projectsTextsFi.projects
-            : projectsTextsEn.projects;
+      : projectsTextsEn.projects;
   }
 
-  function onSearchFieldChange(event){
+  function onSearchFieldChange(event) {
     setSearchTerm(event.target.value);
-    if(event.target.value===""){
-      projectsIndex = 0;
+    if (event.target.value === "") {
+      projectsIndexRef.current = 0;
       filterAndSetProjects(undefined, getAllProjects());
     }
   }
 
-  function handleProjectsClick(id){
-    if(projects.length < 3){
-      return; 
+  function handleProjectsClick(id) {
+    if (projects.length < 3) {
+      return;
     }
 
-    projectsIndex = (id===0) ? (projectsIndex < 1 ? projectsIndex : -1) 
-            : (projectsIndex >= projects.length ? projectsIndex : +1);
+    if(id === 0){
+      projectsIndexRef.current = (projectsIndexRef.current < 1 ? projectsIndexRef.current : projectsIndexRef.current-1)
+    }else {
+      projectsIndexRef.current = (projectsIndexRef.current >= (projects.length-3) ? projectsIndexRef.current : projectsIndexRef.current+1);
+    }
     filterAndSetProjects(undefined, projects);
   }
 
@@ -157,10 +152,10 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Homepage { ...homePageData } />} />
-        <Route path="/background" element={<Background { ...backgroundPageData }/>} />
-        <Route path="/projects" element={<Projects { ...projectsPageData } />} />
-        <Route path="*" element={<ErrorPage404 { ...errorPageData } />} />
+        <Route path="/" element={<Homepage {...homePageData} />} />
+        <Route path="/background" element={<Background {...backgroundPageData} />} />
+        <Route path="/projects" element={<Projects {...projectsPageData} />} />
+        <Route path="*" element={<ErrorPage404 {...errorPageData} />} />
       </Routes>
     </div>
   );
